@@ -337,6 +337,7 @@ out = pipe(
     request="put the man in a snowy street",
     video=src,
     num_frames=len(src),
+    height=H, width=W,
     guidance_scale=2.0,
     image_guidance_scale=1.0,
 )
@@ -348,9 +349,11 @@ out = pipe(
     prompt="make it snow",
     video=src,
     num_frames=len(src),
+    height=H, width=W,
     guidance_scale=2.0,
     image_guidance_scale=1.0,
 )
+save_video(list(out.frames[0]), "out.mp4", fps=24, quality=5)
 ```
 
 `guidance_scale` maps to `cfg_scale`; `image_guidance_scale` maps to
