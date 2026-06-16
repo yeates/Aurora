@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aurora"
+version = "1.0.0"
+description = "Aurora: Unified Video Editing with a Tool-Using Agent"
+license = {text = "MIT"}
+requires-python = ">=3.10.1"
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision",
+    "transformers",
+    "imageio",
+    "imageio[ffmpeg]",
+    "safetensors",
+    "einops",
+    "sentencepiece",
+    "protobuf",
+    "modelscope",
+    "ftfy",
+    "pandas",
+    "accelerate",
+    "peft",
+    "datasets",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.setuptools.packages.find]
+where = ["./"]
+include = ["diffsynth", "diffsynth.*", "aurora", "aurora.*", "evaluation", "evaluation.*"]
+
+[project.optional-dependencies]
+# Optional inference backends (opt-in; the diffsynth editor + transformers agent
+# paths are the defaults and need none of these). Install vLLM in a SEPARATE venv
+# to avoid disturbing the torch 2.5.0 / flash-attn 2.7.3 pin.
+diffusers = ["diffusers>=0.36"]
+vllm = ["vllm>=0.11"]
+npu_aarch64 = [
+    "torch==2.7.1",
+    "torch-npu==2.7.1",
+    "torchvision==0.22.1"
+]
+npu = [
+    "torch==2.7.1+cpu",
+    "torch-npu==2.7.1",
+    "torchvision==0.22.1+cpu"
+]
+
+[tool.setuptools]
+include-package-data = true

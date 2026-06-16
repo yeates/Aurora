@@ -1,0 +1,20 @@
+Aurora: Unified Video Editing with a Tool-Using Agent
+
+This product includes software and assets developed by third parties.
+
+1. Diffusion engine
+   The diffusion engine under `diffsynth/` is derived from ModelScope
+   DiffSynth-Studio, licensed under the Apache License, Version 2.0.
+   Source: https://github.com/modelscope/DiffSynth-Studio
+   A copy of the Apache-2.0 license is available at
+   https://www.apache.org/licenses/LICENSE-2.0
+
+2. AgentEdit-Bench media
+   Video and image media used in AgentEdit-Bench are sourced from Pexels.
+   Source: https://www.pexels.com
+   Pexels content is provided under the Pexels License
+   (https://www.pexels.com/license/).
+
+3. Training datasets
+   Training datasets retain their original licenses. See the data-attribution
+   section of README.md for the per-dataset sources and license terms.
