@@ -99,6 +99,11 @@ The setup script pins `transformers` after `modelscope`, builds `flash-attn`
 against PyTorch 2.5.0, installs evaluation dependencies such as `decord` and
 `openai`, and runs a small import check.
 
+we provide a script to help find the pre-built wheel suitable for your system.
+```bash
+python get_flash_attn.py
+```
+
 After installation, the main Python entry points are:
 
 ```python
