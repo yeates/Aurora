@@ -36,22 +36,25 @@ CUDA_HOME="${CUDA_HOME}" pip install deepspeed
 # 6. Evaluation / benchmark deps.
 #    setuptools<70 is required because ViCLIP code uses pkg_resources.packaging
 #    (removed in setuptools>=70). openai is the Gemini OpenAI-compatible client.
+#    opencv-python-headless is needed by aurora.agent (cv2 fallback for video frame sampling).
 echo "--- Installing evaluation deps ---"
-pip install decord openai ftfy 'setuptools<70'
+pip install decord openai ftfy 'setuptools<70' opencv-python-headless
 
 # 7. Verify imports — if this fails, something went wrong above.
 echo "--- Verifying imports ---"
 python3 -c "
-import transformers, deepspeed, peft, imageio, flash_attn, modelscope, decord, openai
+import transformers, deepspeed, peft, imageio, flash_attn, modelscope, decord, openai, cv2
 assert transformers.__version__ == '5.3.0', f'transformers wrong: {transformers.__version__}'
 print(f'OK: transformers={transformers.__version__} flash_attn={flash_attn.__version__} deepspeed={deepspeed.__version__}')
-print(f'    decord={decord.__version__} openai={openai.__version__}')
+print(f'    decord={decord.__version__} openai={openai.__version__} cv2={cv2.__version__}')
 "
 
 # 8. Install the Aurora packages (diffsynth + aurora + evaluation) in editable mode.
-echo "--- Installing Aurora packages (pip install -e .) ---"
+#    [diffusers] extra pulls in `diffusers`, required by aurora.diffusers_pipeline.AuroraPipeline.
+echo "--- Installing Aurora packages (pip install -e '.[diffusers]') ---"
 cd "${SCRIPT_DIR}"
-pip install -e .
+pip install -e '.[diffusers]'
+python3 -c "import diffusers; print(f'OK: diffusers={diffusers.__version__}')"
 
 echo ""
 echo "=== Setup complete! ==="
